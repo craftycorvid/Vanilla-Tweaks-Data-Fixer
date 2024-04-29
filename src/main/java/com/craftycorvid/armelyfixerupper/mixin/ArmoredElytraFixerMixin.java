@@ -7,24 +7,15 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import com.craftycorvid.armelyfixerupper.ArmoredElytraFixerUpper;
-import com.mojang.datafixers.DataFix;
-import com.mojang.datafixers.schemas.Schema;
 import com.mojang.serialization.Dynamic;
 
 @Mixin(ItemStackComponentizationFix.class)
-public abstract class ArmoredElytraFixerMixin extends DataFix {
-
-    protected ArmoredElytraFixerMixin(Schema outputSchema, final boolean changesType) {
-        super(outputSchema, changesType);
-    }
-
+public abstract class ArmoredElytraFixerMixin {
     @Inject(method = "fixStack", at = @At("HEAD"))
-    private static void fixStack(StackData data, Dynamic<?> dynamic, CallbackInfo ci) {
+    private static void fixStackArmEly(StackData data, Dynamic<?> dynamic, CallbackInfo ci) {
         if (data.itemEquals("minecraft:elytra")) {
             Optional<? extends Dynamic<?>> optional = data.getAndRemove("armElyData").result();
             if (optional.isPresent()) {
-                ArmoredElytraFixerUpper.LOGGER.info("Fixing ArmEly");
                 Dynamic<?> armElyDynamic = (Dynamic<?>) optional.get();
                 Dynamic<?> newArmElyDynamic = fixArmEly(data, armElyDynamic);
                 data.setComponent("minecraft:custom_data", newArmElyDynamic);

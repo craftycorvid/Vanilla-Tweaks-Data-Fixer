@@ -1,4 +1,7 @@
 accessWidener v2 named
-accessible class  net/minecraft/datafixer/fix/ItemStackComponentizationFix$StackData
+accessible class net/minecraft/datafixer/fix/ItemStackComponentizationFix$StackData
 accessible field net/minecraft/datafixer/fix/ItemStackComponentizationFix$StackData nbt Lcom/mojang/serialization/Dynamic;
 accessible method net/minecraft/datafixer/fix/ItemStackComponentizationFix fixStack (Lnet/minecraft/datafixer/fix/ItemStackComponentizationFix$StackData;Lcom/mojang/serialization/Dynamic;)V
+accessible field net/minecraft/util/UserCache byUuid Ljava/util/Map;
+accessible class net/minecraft/util/UserCache$Entry
+accessible field net/minecraft/server/MinecraftServer saveHandler Lnet/minecraft/world/WorldSaveHandler;

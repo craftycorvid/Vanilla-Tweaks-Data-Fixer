@@ -2,7 +2,7 @@
 
 A datafixer mod to convert data stored by the [Vanilla Tweaks Armored Elytra Data Pack](https://vanillatweaks.net/picker/datapacks/) from the old NBT format(1.20.4 and below) to the new components format(1.20.5+)
 
-**NOTE** There's no official version of Armored Elytra for 1.20.5 yet. This currently converts to an unofficial port's format which will not be compatible with the official version. This mod will be updated to the match the official version once it is released.
+**NOTE** There's no official version of Armored Elytra for 1.20.5 yet. This currently converts to an unofficial port's format which will not be compatible with the official version. This mod will be updated to match the official version once it is released.
 
 ## How to use this mod
 1. **MAKE A BACKUP OF YOUR WORLD!**
@@ -16,6 +16,6 @@ A datafixer mod to convert data stored by the [Vanilla Tweaks Armored Elytra Dat
 9. Enjoy!
 
 ## Things to note
-- For singleplayer it would be as easy as installing the mod and loading the world.
-- For multiplayer I had to come up with a workaround to the fact that Minecraft only updates player data when people connect to your server. This mod uses the usercache.json file to load, update and save all your player's data. 
-- If you copy your world to a client, install the mod and run it things will seem to work for your player, but other player's data won't be updated. You need to run the mod on your server for it to update every player's data in one go.
+- For singleplayer it should be as easy as installing the mod and loading the world.
+- For multiplayer I had to come up with a workaround to the fact that Minecraft only updates player data when people connect to your server. This mod uses the `usercache.json` file to load, update and save all your player's data. 
+- If you copy your world to a client, install the mod and run it things will seem to work for your player, but other player's data won't be updated. You also need to copy `usercache.json` into your `.minecraft` folder for the mod to find all your players and update them.

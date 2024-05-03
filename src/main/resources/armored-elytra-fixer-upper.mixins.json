@@ -3,7 +3,8 @@
 	"package": "com.craftycorvid.armelyfixerupper.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ArmoredElytraFixerMixin",
+		"DataFixerBuilderMixin",
+		"DataFixerSchemasMixin",
 		"GetAllPlayersMixin",
 		"ServerMixin"
 	],

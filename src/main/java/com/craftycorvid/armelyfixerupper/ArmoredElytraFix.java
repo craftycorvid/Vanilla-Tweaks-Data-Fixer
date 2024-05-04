@@ -30,28 +30,29 @@ public class ArmoredElytraFix extends DataFix {
         Dynamic<?> dynamic2 = dynamic.emptyMap();
         Optional<? extends Dynamic<?>> chestplateOptional = dynamic.get("chestplate").result();
         if (chestplateOptional.isPresent()) {
-            Dynamic<?> chestplateDynamic = (Dynamic<?>) chestplateOptional.get();
+            Dynamic<?> chestplateDynamic = chestplateOptional.get();
             StackData chestplateData = StackData.fromDynamic(chestplateDynamic).get();
             ItemStackComponentizationFix.fixStack(chestplateData, chestplateData.nbt);
             dynamic2 = dynamic2.set("chestplate", chestplateData.finalize());
         }
         Optional<? extends Dynamic<?>> elytraOptional = dynamic.get("elytra").result();
         if (elytraOptional.isPresent()) {
-            Dynamic<?> elytraDynamic = (Dynamic<?>) elytraOptional.get();
+            Dynamic<?> elytraDynamic = elytraOptional.get();
             StackData elytraData = StackData.fromDynamic(elytraDynamic).get();
             ItemStackComponentizationFix.fixStack(elytraData, elytraData.nbt);
             dynamic2 = dynamic2.set("elytra", elytraData.finalize());
         }
         Optional<? extends Dynamic<?>> materialOptional = dynamic.get("material").result();
         if (materialOptional.isPresent()) {
-            Dynamic<?> materialDynamic = (Dynamic<?>) materialOptional.get();
+            Dynamic<?> materialDynamic = materialOptional.get();
             dynamic2 = dynamic2.set("material", materialDynamic);
         }
         Optional<? extends Dynamic<?>> armoredOptional = dynamic.get("armored").result();
         if (armoredOptional.isPresent()) {
-            Dynamic<?> armoredDynamic = (Dynamic<?>) armoredOptional.get();
+            Dynamic<?> armoredDynamic = armoredOptional.get();
             dynamic2 = dynamic2.set("armored", armoredDynamic);
         }
+        dynamic2 = dynamic2.set("armElyDataVersion", dynamic2.createInt(3839));
         armElyDynamic = armElyDynamic.set("armElyData", dynamic2);
         return armElyDynamic;
     }

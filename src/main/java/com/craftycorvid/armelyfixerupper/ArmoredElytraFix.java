@@ -1,5 +1,7 @@
 package com.craftycorvid.armelyfixerupper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import com.mojang.datafixers.DataFix;
 import com.mojang.datafixers.DataFixUtils;
@@ -19,32 +21,36 @@ public class ArmoredElytraFix extends DataFix {
     public static void fixArmEly(ArmElyStackData data, Dynamic<?> dynamic) {
         data.getAndRemove("armElyData").result().ifPresent(armElyData -> {
             ArmoredElytraFixerUpper.LOGGER.info("Fixing ArmEly Data");
-            Dynamic<?> newArmElyDynamic = fixEmbeddedItems(armElyData);
-            data.setComponent("minecraft:custom_data", newArmElyDynamic);
+            Dynamic<?> bundleContentsDynamic = fixEmbeddedItems(armElyData);
+            data.setComponent("minecraft:bundle_contents", bundleContentsDynamic);
+            Dynamic<?> armoredElytraDynamic = fixArmElyData(armElyData);
+            data.setComponent("minecraft:custom_data", armoredElytraDynamic);
         });
     }
 
-    private static Dynamic<?> newArmElyData;
-
     private static Dynamic<?> fixEmbeddedItems(Dynamic<?> dynamic) {
-        newArmElyData = dynamic.emptyMap();
+        List<Dynamic<?>> bundleContentsList = new ArrayList<Dynamic<?>>();
         dynamic.get("chestplate").result().ifPresent(chestplateDynamic -> {
             StackData chestplateData = StackData.fromDynamic(chestplateDynamic).get();
             ItemStackComponentizationFix.fixStack(chestplateData, chestplateData.nbt);
-            newArmElyData = newArmElyData.set("chestplate", chestplateData.finalize());
+            bundleContentsList.add(chestplateData.finalize());
         });
         dynamic.get("elytra").result().ifPresent(elytraDynamic -> {
             StackData elytraData = StackData.fromDynamic(elytraDynamic).get();
             ItemStackComponentizationFix.fixStack(elytraData, elytraData.nbt);
-            newArmElyData = newArmElyData.set("elytra", elytraData.finalize());
+            bundleContentsList.add(elytraData.finalize());
         });
-        dynamic.get("material").result().ifPresent(
-                materialDynamic -> newArmElyData = newArmElyData.set("material", materialDynamic));
-        dynamic.get("armored").result().ifPresent(
-                armoredDynamic -> newArmElyData = newArmElyData.set("armored", armoredDynamic));
-        return dynamic.emptyMap().set("armElyData", newArmElyData);
+        return dynamic.createList(bundleContentsList.stream());
     }
 
+    private static Dynamic<?> fixArmElyData(Dynamic<?> dynamic) {
+        Dynamic<?> newArmElyData = dynamic.emptyMap();
+        Optional<? extends Dynamic<?>> armoredDynamic = dynamic.get("armored").result();
+        if (armoredDynamic.isPresent()) {
+            newArmElyData = newArmElyData.set("armored", armoredDynamic.get());
+        }
+        return dynamic.emptyMap().set("armored_elytra", newArmElyData);
+    }
 
     protected TypeRewriteRule makeRule() {
         return this.writeFixAndRead("Armored Elytra componentization",

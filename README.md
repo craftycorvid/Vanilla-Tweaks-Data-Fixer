@@ -2,17 +2,15 @@
 
 A datafixer mod to convert data stored by the [Vanilla Tweaks Armored Elytra Data Pack](https://vanillatweaks.net/picker/datapacks/) from the old NBT format(1.20.4 and below) to the new components format(1.20.5+)
 
-**NOTE** There's no official version of Armored Elytra for 1.20.5 yet. This currently converts to an unofficial port's format which will not be compatible with the official version. This mod will be updated to match the official version once it is released.
-
 ## How to use this mod
 1. **MAKE A BACKUP OF YOUR WORLD!**
 2. Make SURE you can load that backup of your world if things go sideways
 3. I'm serious, it's not my fault if you lose your whole world!
-4. Install 1.20.5, fabric, the Armored Elytra data pack and this mod
-5. Start the server, or load the world you are trying to update
-6. Once everything has fully loaded shut down the server or close your game
-7. Delete this mod
-8. Load your world again and test if your elytra will properly split on a grindstone
+4. Install 1.20.6, fabric, the updated Armored Elytra data pack and this mod
+5. Start the server and connect to it, or load the world you are trying to update
+7. Test if your armored elytra will properly split on a grindstone
+7. Shut down the server or close your game
+8. Delete this mod, its job is done
 9. Enjoy!
 
 ## Things to note

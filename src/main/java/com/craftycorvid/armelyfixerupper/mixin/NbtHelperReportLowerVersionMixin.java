@@ -11,9 +11,9 @@ import net.minecraft.nbt.NbtHelper;
 public abstract class NbtHelperReportLowerVersionMixin {
     @WrapOperation(method = "getDataVersion", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/nbt/NbtCompound;getInt(Ljava/lang/String;)I"))
-    private static int reportLowerVersion(NbtCompound instance, String tag,
+    private static int reportLowerVersion(NbtCompound instance, String key,
             Operation<Integer> original) {
-        int dataVersion = original.call(instance, tag);
+        int dataVersion = original.call(instance, key);
         if (dataVersion == 3839) {
             return 3838;
         } else {

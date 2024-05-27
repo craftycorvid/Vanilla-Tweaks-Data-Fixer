@@ -30,15 +30,15 @@ public class ArmoredElytraFix extends DataFix {
 
     private static Dynamic<?> fixEmbeddedItems(Dynamic<?> dynamic) {
         List<Dynamic<?>> bundleContentsList = new ArrayList<Dynamic<?>>();
-        dynamic.get("elytra").result().ifPresent(elytraDynamic -> {
-            StackData elytraData = StackData.fromDynamic(elytraDynamic).get();
-            ItemStackComponentizationFix.fixStack(elytraData, elytraData.nbt);
-            bundleContentsList.add(elytraData.finalize());
-        });
         dynamic.get("chestplate").result().ifPresent(chestplateDynamic -> {
             StackData chestplateData = StackData.fromDynamic(chestplateDynamic).get();
             ItemStackComponentizationFix.fixStack(chestplateData, chestplateData.nbt);
             bundleContentsList.add(chestplateData.finalize());
+        });
+        dynamic.get("elytra").result().ifPresent(elytraDynamic -> {
+            StackData elytraData = StackData.fromDynamic(elytraDynamic).get();
+            ItemStackComponentizationFix.fixStack(elytraData, elytraData.nbt);
+            bundleContentsList.add(elytraData.finalize());
         });
         return dynamic.createList(bundleContentsList.stream());
     }

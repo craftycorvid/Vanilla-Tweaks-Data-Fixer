@@ -1,4 +1,4 @@
-package com.craftycorvid.armelyfixerupper.mixin;
+package com.craftycorvid.vtdatafixer.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

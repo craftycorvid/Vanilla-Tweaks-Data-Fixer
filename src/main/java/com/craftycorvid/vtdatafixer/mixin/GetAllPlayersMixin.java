@@ -1,4 +1,4 @@
-package com.craftycorvid.armelyfixerupper.mixin;
+package com.craftycorvid.vtdatafixer.mixin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import com.craftycorvid.armelyfixerupper.GetAllPlayersUserCache;
+import com.craftycorvid.vtdatafixer.GetAllPlayersUserCache;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.util.UserCache;
 import net.minecraft.util.UserCache.Entry;

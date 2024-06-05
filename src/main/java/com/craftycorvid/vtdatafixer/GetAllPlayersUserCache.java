@@ -1,4 +1,4 @@
-package com.craftycorvid.armelyfixerupper;
+package com.craftycorvid.vtdatafixer;
 
 import java.util.ArrayList;
 import java.util.List;

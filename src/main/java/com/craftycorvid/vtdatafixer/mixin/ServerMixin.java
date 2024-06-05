@@ -1,6 +1,6 @@
-package com.craftycorvid.armelyfixerupper.mixin;
+package com.craftycorvid.vtdatafixer.mixin;
 
-import com.craftycorvid.armelyfixerupper.ArmoredElytraFixerUpper;
+import com.craftycorvid.vtdatafixer.VanillaTweaksDataFixer;
 import java.util.List;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,6 +31,6 @@ public abstract class ServerMixin {
             this.saveHandler.loadPlayerData(playerEntity);
             this.saveHandler.savePlayerData(playerEntity);
         });
-        ArmoredElytraFixerUpper.LOGGER.info("Finished updating player data");
+        VanillaTweaksDataFixer.LOGGER.info("Finished updating player data");
     }
 }

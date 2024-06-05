@@ -1,8 +1,8 @@
 {
 	"schemaVersion": 1,
-	"id": "armored-elytra-fixer-upper",
+	"id": "vanilla-tweaks-data-fixer",
 	"version": "${version}",
-	"name": "Armored Elytra Fixer Upper",
+	"name": "Vanilla Tweaks Data Fixer",
 	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
 		"Me!"
@@ -12,24 +12,24 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/armored-elytra-fixer-upper/icon.png",
+	"icon": "assets/vanilla-tweaks-data-fixer/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.craftycorvid.armelyfixerupper.ArmoredElytraFixerUpper"
+			"com.craftycorvid.vtdatafixer.VanillaTweaksDataFixer"
 		]
 	},
 	"mixins": [
-		"armored-elytra-fixer-upper.mixins.json"
+		"vanilla-tweaks-data-fixer.mixins.json"
 	],
 	"custom": {
 		"loom:injected_interfaces": {
 			"net/minecraft/util/UserCache": [
-				"com/craftycorvid/armelyfixerupper/GetAllPlayersUserCache"
+				"com/craftycorvid/vtdatafixer/GetAllPlayersUserCache"
 			]
 		}
 	},
-	"accessWidener": "armored-elytra-fixer-upper.accesswidener",
+	"accessWidener": "vanilla-tweaks-data-fixer.accesswidener",
 	"depends": {
 		"fabricloader": ">=0.15.10",
 		"minecraft": "~1.20.6",

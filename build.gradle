@@ -26,7 +26,7 @@ dependencies {
 }
 
 loom {
-	accessWidenerPath = file("src/main/resources/armored-elytra-fixer-upper.accesswidener")
+	accessWidenerPath = file("src/main/resources/vanilla-tweaks-data-fixer.accesswidener")
 }
 
 processResources {

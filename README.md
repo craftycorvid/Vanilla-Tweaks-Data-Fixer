@@ -1,4 +1,4 @@
-# Armored Elytra Fixer Upper
+# Vanilla Tweaks Data Fixer
 
 A datafixer mod to convert data stored by the [Vanilla Tweaks Armored Elytra Data Pack](https://vanillatweaks.net/picker/datapacks/) from the old NBT format(1.20.4 and below) to the new components format(1.20.5+)
 

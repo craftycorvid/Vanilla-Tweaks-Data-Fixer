@@ -1,4 +1,4 @@
-package com.craftycorvid.armelyfixerupper;
+package com.craftycorvid.vtdatafixer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class ArmoredElytraFix extends DataFix {
 
     public static void fixArmEly(ArmElyStackData data, Dynamic<?> dynamic) {
         data.getAndRemove("armElyData").result().ifPresent(armElyData -> {
-            ArmoredElytraFixerUpper.LOGGER.info("Fixing ArmEly Data");
+            VanillaTweaksDataFixer.LOGGER.info("Fixing Armored Elytra Data");
             Dynamic<?> bundleContentsDynamic = fixEmbeddedItems(armElyData);
             data.setComponent("minecraft:bundle_contents", bundleContentsDynamic);
             Dynamic<?> armoredElytraDynamic = fixArmElyData(armElyData);

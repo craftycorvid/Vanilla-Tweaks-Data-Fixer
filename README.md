@@ -6,14 +6,13 @@ A datafixer mod to convert data stored by the [Vanilla Tweaks Armored Elytra Dat
 1. **MAKE A BACKUP OF YOUR WORLD!**
 2. Make SURE you can load that backup of your world if things go sideways
 3. I'm serious, it's not my fault if you lose your whole world!
-4. Install 1.20.6, fabric, the updated Armored Elytra data pack and this mod
+4. Install 1.20.6 or 1.21, fabric and this mod
 5. Start the game and optimize your world
     - On a server add `--forceUpgrade`
     - On a client select the save, click Edit, click Optimize World
-6. Test if your armored elytra will properly split on a grindstone
-7. Shut down the server or close your game
-8. Delete this mod, its job is done
-9. Enjoy!
+6. Shut down the server or close your game
+7. Delete this mod, its job is done
+8. Enjoy!
 
 ## Things to note
 - For singleplayer it should be as easy as installing the mod and loading the world.

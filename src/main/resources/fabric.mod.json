@@ -3,7 +3,7 @@
 	"id": "vanilla-tweaks-data-fixer",
 	"version": "${version}",
 	"name": "Vanilla Tweaks Data Fixer",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "A datafixer mod to convert Vanilla Tweaks' data from 1.20.4 to 1.20.5+",
 	"authors": [
 		"Me!"
 	],

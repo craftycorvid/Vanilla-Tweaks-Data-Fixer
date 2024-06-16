@@ -1,10 +1,11 @@
 package com.craftycorvid.vtdatafixer.datafix;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.IntStream;
 import com.craftycorvid.vtdatafixer.VanillaTweaksDataFixer;
 import com.mojang.datafixers.DataFix;
 import com.mojang.datafixers.DataFixUtils;
@@ -15,7 +16,6 @@ import com.mojang.serialization.OptionalDynamic;
 import net.minecraft.datafixer.TypeReferences;
 import net.minecraft.datafixer.fix.ItemStackComponentizationFix;
 import net.minecraft.datafixer.fix.ItemStackComponentizationFix.StackData;
-import net.minecraft.util.Uuids;
 
 public class ArmoredElytraFix extends DataFix {
     public ArmoredElytraFix(Schema outputSchema) {
@@ -30,9 +30,9 @@ public class ArmoredElytraFix extends DataFix {
             Dynamic<?> armoredElytraDynamic = fixArmElyData(armElyData);
             data.setComponent("minecraft:custom_data", armoredElytraDynamic);
         });
-        data.getAndRemoveAttributeModifeirs("modifiers").result().ifPresent(attributeModifiers -> {
+        data.components.get("minecraft:bundle_contents").result().ifPresent(bundleContents -> {
             VanillaTweaksDataFixer.LOGGER.info("Fixing Armored Elytra Attributes");
-            Dynamic<?> fixedModifiers = fixModifiers(attributeModifiers);
+            Dynamic<?> fixedModifiers = fixModifiers(bundleContents);
             data.setComponent("minecraft:attribute_modifiers", fixedModifiers);
         });
     }
@@ -62,12 +62,61 @@ public class ArmoredElytraFix extends DataFix {
     }
 
     private static Dynamic<?> fixModifiers(Dynamic<?> dynamic) {
+        String chestplateId = dynamic.asList(i -> i).getFirst().get("id").asString(null);
+        VanillaTweaksDataFixer.LOGGER.info(chestplateId);
         List<Dynamic<?>> newAttributeList = new ArrayList<Dynamic<?>>();
-        List<Dynamic<?>> attributeDynamicList =
-                dynamic.asList(attributeDynamic -> attributeDynamic);
-        attributeDynamicList
-                .forEach(attributeDynamic -> newAttributeList.add(attributeDynamic.set("uuid",
-                        dynamic.createIntList(IntStream.of(Uuids.toIntArray(UUID.randomUUID()))))));
+        Map<Dynamic<?>, Dynamic<?>> armor = new HashMap();
+        armor.put(dynamic.createString("type"), dynamic.createString("minecraft:generic.armor"));
+        armor.put(dynamic.createString("operation"), dynamic.createString("add_value"));
+        armor.put(dynamic.createString("slot"), dynamic.createString("chest"));
+        armor.put(dynamic.createString("id"),
+                dynamic.createString("minecraft:" + UUID.randomUUID().toString()));
+
+        Map<Dynamic<?>, Dynamic<?>> toughness = new HashMap();
+        toughness.put(dynamic.createString("type"),
+                dynamic.createString("minecraft:generic.armor_toughness"));
+        toughness.put(dynamic.createString("operation"), dynamic.createString("add_value"));
+        toughness.put(dynamic.createString("slot"), dynamic.createString("chest"));
+        toughness.put(dynamic.createString("id"),
+                dynamic.createString("minecraft:" + UUID.randomUUID().toString()));
+        switch (chestplateId) {
+            case "minecraft:netherite_chestplate":
+                armor.put(dynamic.createString("amount"), dynamic.createDouble(8));
+                newAttributeList.add(dynamic.createMap(armor));
+
+                toughness.put(dynamic.createString("amount"), dynamic.createDouble(3));
+                newAttributeList.add(dynamic.createMap(toughness));
+
+                Map<Dynamic<?>, Dynamic<?>> knockback = new HashMap();
+                knockback.put(dynamic.createString("type"),
+                        dynamic.createString("minecraft:generic.knockback_resistance"));
+                knockback.put(dynamic.createString("operation"), dynamic.createString("add_value"));
+                knockback.put(dynamic.createString("amount"), dynamic.createDouble(0.1));
+                knockback.put(dynamic.createString("slot"), dynamic.createString("chest"));
+                knockback.put(dynamic.createString("id"),
+                        dynamic.createString("minecraft:" + UUID.randomUUID().toString()));
+                newAttributeList.add(dynamic.createMap(knockback));
+                break;
+            case "minecraft:diamond_chestplate":
+                armor.put(dynamic.createString("amount"), dynamic.createDouble(8));
+                newAttributeList.add(dynamic.createMap(armor));
+                toughness.put(dynamic.createString("amount"), dynamic.createDouble(2));
+                newAttributeList.add(dynamic.createMap(toughness));
+                break;
+            case "minecraft:iron_chestplate":
+                armor.put(dynamic.createString("amount"), dynamic.createDouble(6));
+                newAttributeList.add(dynamic.createMap(armor));
+                break;
+            case "minecraft:golden_chestplate":
+            case "minecraft:chainmail_chestplate":
+                armor.put(dynamic.createString("amount"), dynamic.createDouble(5));
+                newAttributeList.add(dynamic.createMap(armor));
+                break;
+            case "minecraft:leather_chestplate":
+                armor.put(dynamic.createString("amount"), dynamic.createDouble(3));
+                newAttributeList.add(dynamic.createMap(armor));
+                break;
+        }
         return dynamic.createList(newAttributeList.stream());
     }
 

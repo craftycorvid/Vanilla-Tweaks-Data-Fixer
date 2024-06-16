@@ -14,8 +14,8 @@ public abstract class NbtHelperReportLowerVersionMixin {
     private static int reportLowerVersion(NbtCompound instance, String key,
             Operation<Integer> original) {
         int dataVersion = original.call(instance, key);
-        if (dataVersion == 3839) {
-            return 3838;
+        if (dataVersion == 3953) {
+            return 3952;
         } else {
             return dataVersion;
         }

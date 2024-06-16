@@ -11,14 +11,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.network.packet.c2s.common.SyncedClientOptions;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.world.WorldSaveHandler;
+import net.minecraft.world.PlayerSaveHandler;
 import com.mojang.authlib.GameProfile;
 
 @Mixin(MinecraftServer.class)
 public abstract class ServerMixin {
     @Final
     @Shadow
-    protected WorldSaveHandler saveHandler;
+    protected PlayerSaveHandler saveHandler;
 
     @Inject(method = "loadWorld", at = @At("TAIL"))
     private void loadWorld(CallbackInfo ci) {

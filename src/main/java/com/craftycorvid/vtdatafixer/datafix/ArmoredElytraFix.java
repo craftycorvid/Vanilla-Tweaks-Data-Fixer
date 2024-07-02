@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 import com.craftycorvid.vtdatafixer.VanillaTweaksDataFixer;
 import com.mojang.datafixers.DataFix;
 import com.mojang.datafixers.DataFixUtils;
@@ -65,20 +64,19 @@ public class ArmoredElytraFix extends DataFix {
         String chestplateId = dynamic.asList(i -> i).getFirst().get("id").asString(null);
         VanillaTweaksDataFixer.LOGGER.info(chestplateId);
         List<Dynamic<?>> newAttributeList = new ArrayList<Dynamic<?>>();
-        Map<Dynamic<?>, Dynamic<?>> armor = new HashMap();
+        Map<Dynamic<?>, Dynamic<?>> armor = new HashMap<Dynamic<?>, Dynamic<?>>();
         armor.put(dynamic.createString("type"), dynamic.createString("minecraft:generic.armor"));
         armor.put(dynamic.createString("operation"), dynamic.createString("add_value"));
         armor.put(dynamic.createString("slot"), dynamic.createString("chest"));
-        armor.put(dynamic.createString("id"),
-                dynamic.createString("minecraft:" + UUID.randomUUID().toString()));
+        armor.put(dynamic.createString("id"), dynamic.createString("armored_elytra:armor"));
 
-        Map<Dynamic<?>, Dynamic<?>> toughness = new HashMap();
+        Map<Dynamic<?>, Dynamic<?>> toughness = new HashMap<Dynamic<?>, Dynamic<?>>();
         toughness.put(dynamic.createString("type"),
                 dynamic.createString("minecraft:generic.armor_toughness"));
         toughness.put(dynamic.createString("operation"), dynamic.createString("add_value"));
         toughness.put(dynamic.createString("slot"), dynamic.createString("chest"));
         toughness.put(dynamic.createString("id"),
-                dynamic.createString("minecraft:" + UUID.randomUUID().toString()));
+                dynamic.createString("armored_elytra:armor_toughness"));
         switch (chestplateId) {
             case "minecraft:netherite_chestplate":
                 armor.put(dynamic.createString("amount"), dynamic.createDouble(8));
@@ -87,14 +85,14 @@ public class ArmoredElytraFix extends DataFix {
                 toughness.put(dynamic.createString("amount"), dynamic.createDouble(3));
                 newAttributeList.add(dynamic.createMap(toughness));
 
-                Map<Dynamic<?>, Dynamic<?>> knockback = new HashMap();
+                Map<Dynamic<?>, Dynamic<?>> knockback = new HashMap<Dynamic<?>, Dynamic<?>>();
                 knockback.put(dynamic.createString("type"),
                         dynamic.createString("minecraft:generic.knockback_resistance"));
                 knockback.put(dynamic.createString("operation"), dynamic.createString("add_value"));
                 knockback.put(dynamic.createString("amount"), dynamic.createDouble(0.1));
                 knockback.put(dynamic.createString("slot"), dynamic.createString("chest"));
                 knockback.put(dynamic.createString("id"),
-                        dynamic.createString("minecraft:" + UUID.randomUUID().toString()));
+                        dynamic.createString("armored_elytra:knockback_resistance"));
                 newAttributeList.add(dynamic.createMap(knockback));
                 break;
             case "minecraft:diamond_chestplate":

@@ -25,7 +25,7 @@ public abstract class DataFixerSchemasMixin {
          * Schema schema223 = builder.addSchema(3838, EMPTY_IDENTIFIER_NORMALIZE);
          * builder.addFixer(new GravesFix(schema223));
          */
-        Schema schema224 = builder.addSchema(3953, EMPTY_IDENTIFIER_NORMALIZE);
+        Schema schema224 = builder.addSchema(3955, EMPTY_IDENTIFIER_NORMALIZE);
         builder.addFixer(new ArmoredElytraFix(schema224));
     }
 }
